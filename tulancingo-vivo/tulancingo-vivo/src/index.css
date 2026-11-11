@@ -1,0 +1,5 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{@apply bg-crema text-tinta font-sans antialiased}
+h1,h2,h3{@apply font-display text-azul}
+:focus-visible{outline:3px solid #C96F4A;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
