@@ -18,7 +18,7 @@ npm run preview    # servir la compilación (aquí se prueba la PWA)
 El service worker solo se registra en la compilación: `npm run build && npm run preview`. Luego, en Chrome: DevTools → Application (Manifest, Service Workers) y simula Offline.
 
 ## GitHub Actions
-El workflow `.github/workflows/build.yml` instala las dependencias y compila la PWA en cada push a `main` o `master`, pull request y ejecución manual. El resultado valida la compilación, pero no publica el sitio.
+El workflow `.github/workflows/build.yml`, ubicado en la raíz del repositorio, instala las dependencias de esta aplicación y la compila en cada push a `main` o `master`, pull request y ejecución manual. El resultado valida la compilación, pero no publica el sitio.
 
 ## Publicar
 Sube `dist/` a un hosting con **HTTPS** y reescritura de rutas a `index.html`.

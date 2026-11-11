@@ -16,6 +16,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tulancingo-vivo/tulancingo-vivo
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -25,6 +28,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: tulancingo-vivo/tulancingo-vivo/package-lock.json
 
       - name: Install dependencies
         run: npm ci

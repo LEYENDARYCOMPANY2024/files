@@ -17,6 +17,9 @@ npm run preview    # servir la compilación (aquí se prueba la PWA)
 ## Probar la PWA
 El service worker solo se registra en la compilación: `npm run build && npm run preview`. Luego, en Chrome: DevTools → Application (Manifest, Service Workers) y simula Offline.
 
+## GitHub Actions
+El workflow `.github/workflows/build.yml` está en la raíz del repositorio. Instala dependencias y compila la aplicación en `tulancingo-vivo/tulancingo-vivo` en cada push a `main` o `master`, pull request y ejecución manual. El resultado valida la compilación, pero no publica el sitio.
+
 ## Publicar
 Sube `dist/` a un hosting con **HTTPS** y reescritura de rutas a `index.html`.
 - Netlify/Cloudflare Pages: ya incluido `public/_redirects`.
