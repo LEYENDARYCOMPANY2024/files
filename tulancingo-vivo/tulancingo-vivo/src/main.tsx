@@ -6,4 +6,4 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
 import './index.css'
 import App from './App'
-createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>)
+createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter basename={import.meta.env.BASE_URL}><App /></BrowserRouter></React.StrictMode>)

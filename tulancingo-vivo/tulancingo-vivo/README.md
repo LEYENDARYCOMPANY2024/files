@@ -18,10 +18,10 @@ npm run preview    # servir la compilación (aquí se prueba la PWA)
 El service worker solo se registra en la compilación: `npm run build && npm run preview`. Luego, en Chrome: DevTools → Application (Manifest, Service Workers) y simula Offline.
 
 ## GitHub Actions
-El workflow `.github/workflows/build.yml`, ubicado en la raíz del repositorio, instala las dependencias de esta aplicación y la compila en cada push a `main` o `master`, pull request y ejecución manual. El resultado valida la compilación, pero no publica el sitio.
+El workflow `.github/workflows/build.yml`, ubicado en la raíz del repositorio, compila la app en cada push y pull request. En `main` o `master` también la publica automáticamente en [GitHub Pages](https://leyendarycompany2024.github.io/files/). Puedes ejecutarlo manualmente desde la pestaña **Actions**.
 
 ## Publicar
-Sube `dist/` a un hosting con **HTTPS** y reescritura de rutas a `index.html`.
+Sube `dist/` a un hosting con **HTTPS** y reescritura de rutas a `index.html`. Para GitHub Pages, el workflow ya genera el `404.html` necesario para las rutas de React y publica desde `main` o `master`.
 - Netlify/Cloudflare Pages: ya incluido `public/_redirects`.
 - Vercel: agrega `vercel.json` con `{"rewrites":[{"source":"/(.*)","destination":"/index.html"}]}`.
 

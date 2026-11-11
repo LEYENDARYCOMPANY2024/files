@@ -1,4 +1,4 @@
-name: Build PWA
+name: Build and Deploy PWA
 
 on:
   push:
@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: build-${{ github.ref }}
@@ -30,8 +32,38 @@ jobs:
           cache: npm
           cache-dependency-path: tulancingo-vivo/tulancingo-vivo/package-lock.json
 
+      - name: Set Pages base path
+        run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_ENV"
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build PWA
         run: npm run build
+
+      - name: Add GitHub Pages SPA fallback
+        run: cp dist/index.html dist/404.html
+
+      - name: Configure GitHub Pages
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: tulancingo-vivo/tulancingo-vivo/dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
